@@ -1,24 +1,24 @@
-DROP TABLE IF EXISTS Prescriptions;
-DROP TABLE IF EXISTS Inventory_Orders;
-DROP TABLE IF EXISTS Medications;
-DROP TABLE IF EXISTS Suppliers;
-DROP TABLE IF EXISTS Patients;
-DROP TABLE IF EXISTS Pharmacists;
+DROP TABLE IF EXISTS Prescription;
+DROP TABLE IF EXISTS Inventory_Order;
+DROP TABLE IF EXISTS Medication;
+DROP TABLE IF EXISTS Supplier;
+DROP TABLE IF EXISTS Patient;
+DROP TABLE IF EXISTS Pharmacist;
 
-CREATE TABLE Pharmacists (
+CREATE TABLE Pharmacist (
     PharmacistID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(255),
     ContactInfo VARCHAR(255)
 );
 
-CREATE TABLE Patients (
+CREATE TABLE Patient (
     PatientID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(255),
     ContactInfo VARCHAR(255),
     InsuranceDetails VARCHAR(255)
 );
 
-CREATE TABLE Medications (
+CREATE TABLE Medication (
     MedicationID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(255),
     Manufacturer VARCHAR(255),
@@ -26,7 +26,7 @@ CREATE TABLE Medications (
     PricePerUnit DECIMAL(10, 2)
 );
 
-CREATE TABLE Prescriptions (
+CREATE TABLE Prescription (
     PrescriptionID INT AUTO_INCREMENT PRIMARY KEY,
     PatientID INT,
     PharmacistID INT,
@@ -34,37 +34,37 @@ CREATE TABLE Prescriptions (
     MedicationID INT,
     Duration VARCHAR(255),
     RefillsRemaining INT,
-    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
-    FOREIGN KEY (PharmacistID) REFERENCES Pharmacists(PharmacistID),
-    FOREIGN KEY (MedicationID) REFERENCES Medications(MedicationID)
+    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID),
+    FOREIGN KEY (PharmacistID) REFERENCES Pharmacist(PharmacistID),
+    FOREIGN KEY (MedicationID) REFERENCES Medication(MedicationID)
 );
 
-CREATE TABLE Suppliers (
+CREATE TABLE Supplier (
     SupplierID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(255),
     ContactInfo VARCHAR(255)
 );
 
-CREATE TABLE Inventory_Orders (
+CREATE TABLE Inventory_Order (
     OrderID INT AUTO_INCREMENT PRIMARY KEY,
     MedicationID INT,
     SupplierID INT,
     QuantityOrdered INT,
     OrderDate DATE,
     ReceivedDate DATE,
-    FOREIGN KEY (MedicationID) REFERENCES Medications(MedicationID),
-    FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID)
+    FOREIGN KEY (MedicationID) REFERENCES Medication(MedicationID),
+    FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
 );
 
--- ALTER TABLE Pharmacists AUTO_INCREMENT = 1;
--- ALTER TABLE Patients AUTO_INCREMENT = 1;
--- ALTER TABLE Medications AUTO_INCREMENT = 1;
--- ALTER TABLE Prescriptions AUTO_INCREMENT = 1;
--- ALTER TABLE Suppliers AUTO_INCREMENT = 1;
--- ALTER TABLE Inventory_Orders AUTO_INCREMENT = 1;
+-- ALTER TABLE Pharmacist AUTO_INCREMENT = 1;
+-- ALTER TABLE Patient AUTO_INCREMENT = 1;
+-- ALTER TABLE Medication AUTO_INCREMENT = 1;
+-- ALTER TABLE Prescription AUTO_INCREMENT = 1;
+-- ALTER TABLE Supplier AUTO_INCREMENT = 1;
+-- ALTER TABLE Inventory_Order AUTO_INCREMENT = 1;
 
 
-INSERT INTO Pharmacists (PharmacistID, Name, ContactInfo) VALUES
+INSERT INTO Pharmacist (PharmacistID, Name, ContactInfo) VALUES
 (1, 'Mohammed Ahmed', 'mohammed.ahmed@example.com'),
 (2, 'Mohammed Anwar', 'Mohmmed.Anwar@example.com'),
 (3, 'Abdullah faisal', 'Abdullah.faisal@example.com'),
@@ -86,7 +86,7 @@ INSERT INTO Pharmacists (PharmacistID, Name, ContactInfo) VALUES
 (19, 'Lina Maha', 'lina.maha@example.com'),
 (20, 'Ali Bilal', 'ali.bilal@example.com');
 
-INSERT INTO Patients (Name, ContactInfo, InsuranceDetails) VALUES
+INSERT INTO Patient (Name, ContactInfo, InsuranceDetails) VALUES
 ('Anwar Saleh', 'anwar.saleh@example.com', '00122345'),
 ('Leila Abadi', 'leila.abadi@example.com', '00456789'),
 ('Sami Fayed', 'sami.fayed@example.com', '00234567'),
@@ -108,7 +108,7 @@ INSERT INTO Patients (Name, ContactInfo, InsuranceDetails) VALUES
 ('Bilal Hamdi', 'bilal.hamdi@example.com', '00661122'),
 ('Dalia Rahim', 'dalia.rahim@example.com', '00773344');
 
-INSERT INTO Medications (Name, Manufacturer, StockLevel, PricePerUnit) VALUES
+INSERT INTO Medication (Name, Manufacturer, StockLevel, PricePerUnit) VALUES
 ('Panadol Extra', 'GSK', 150, 15.00),
 ('Ventolin Inhaler', 'GSK', 100, 35.00),
 ('Augmentin 625mg', 'GSK', 200, 25.50),
@@ -130,7 +130,7 @@ INSERT INTO Medications (Name, Manufacturer, StockLevel, PricePerUnit) VALUES
 ('Enbrel 50mg', 'Pfizer', 70, 1750.00),
 ('Gleevec 400mg', 'Novartis', 30, 2450.00);
 
-INSERT INTO Prescriptions (PatientID, PharmacistID, DatePrescribed, MedicationID, Duration, RefillsRemaining) VALUES
+INSERT INTO Prescription (PatientID, PharmacistID, DatePrescribed, MedicationID, Duration, RefillsRemaining) VALUES
 (1, 1, '2024-05-01', 1, '10 days', 0),
 (2, 1, '2024-05-02', 2, '30 days', 1),
 (3, 2, '2024-05-03', 3, '15 days', 2),
@@ -152,7 +152,7 @@ INSERT INTO Prescriptions (PatientID, PharmacistID, DatePrescribed, MedicationID
 (19, 5, '2024-05-19', 19, '60 days', 4),
 (20, 5, '2024-05-20', 20, '10 days', 0);
 
-INSERT INTO Suppliers (SupplierID, Name, ContactInfo) VALUES
+INSERT INTO Supplier (SupplierID, Name, ContactInfo) VALUES
 (1, 'MedSupply Inc.', 'info@medsupplyinc.com'),
 (2, 'Global Pharma Ltd.', 'contact@globalpharma.com'),
 (3, 'HealthPlus Distributors', 'support@healthplus.com'),
@@ -174,7 +174,7 @@ INSERT INTO Suppliers (SupplierID, Name, ContactInfo) VALUES
 (19, 'MedicAid Distributing', 'help@medicaidistributing.com'),
 (20, 'Trusted Supplier Network', 'service@trustedsuppliernetwork.com');
 
-INSERT INTO Inventory_Orders (MedicationID, SupplierID, QuantityOrdered, OrderDate, ReceivedDate) VALUES
+INSERT INTO Inventory_Order (MedicationID, SupplierID, QuantityOrdered, OrderDate, ReceivedDate) VALUES
 (1, 1, 100, '2024-04-01', '2024-04-05'),
 (2, 2, 200, '2024-04-02', '2024-04-07'),
 (3, 3, 150, '2024-04-03', '2024-04-08'),
