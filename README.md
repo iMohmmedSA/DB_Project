@@ -8,7 +8,7 @@
     *   **FirstName**
     *   **LastName**
     *   ~~**LicenseNumber**~~
-    *   ~~**ContactInfo**~~
+    *   **ContactInfo**
     *   **PharmacyID** (Foreign Key)
 
 2.  **Patients**
