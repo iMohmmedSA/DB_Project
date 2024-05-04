@@ -3,21 +3,15 @@
 ### Key Entities (Tables)
 
 1.  **Pharmacists**
-    
     *   **PharmacistID** (Primary Key)
-    *   **FirstName**
-    *   **LastName**
-    *   ~~**LicenseNumber**~~
+    *   **Name**
     *   **ContactInfo**
-    *   **PharmacyID** (Foreign Key)
 
 2.  **Patients**
     *   **PatientID** (Primary Key)
-    *   **FirstName**
-    *   **LastName**
-    *   ~~**DateOfBirth**~~
+    *   **Name**
     *   **ContactInfo**
-    *   ~~**InsuranceDetails**~~
+    *   **InsuranceDetails**
 
 3.  **Prescriptions**
     *   **PrescriptionID** (Primary Key)
@@ -25,25 +19,20 @@
     *   **PharmacistID** (Foreign Key)
     *   **DatePrescribed**
     *   **MedicationID** (Foreign Key)
-    *   **Dosage**
-    *   **Frequency**
     *   **Duration**
     *   **RefillsRemaining**
 
 4.  **Medications**
     *   **MedicationID** (Primary Key)
     *   **Name**
-    *   **GenericName**
     *   **Manufacturer**
     *   **StockLevel**
-    *   **MinimumStockLevel**
     *   **PricePerUnit**
 
 5.  **Suppliers**
     *   **SupplierID** (Primary Key)
     *   **Name**
     *   **ContactInfo**
-    *   **Address**
 
 6.  **Inventory Orders**
     *   **OrderID** (Primary Key)
