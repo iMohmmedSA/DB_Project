@@ -56,14 +56,6 @@ CREATE TABLE Inventory_Order (
     FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
 );
 
--- ALTER TABLE Pharmacist AUTO_INCREMENT = 1;
--- ALTER TABLE Patient AUTO_INCREMENT = 1;
--- ALTER TABLE Medication AUTO_INCREMENT = 1;
--- ALTER TABLE Prescription AUTO_INCREMENT = 1;
--- ALTER TABLE Supplier AUTO_INCREMENT = 1;
--- ALTER TABLE Inventory_Order AUTO_INCREMENT = 1;
-
-
 INSERT INTO Pharmacist (PharmacistID, Name, ContactInfo) VALUES
 (1, 'Mohammed Ahmed', 'mohammed.ahmed@example.com'),
 (2, 'Mohammed Anwar', 'Mohmmed.Anwar@example.com'),
