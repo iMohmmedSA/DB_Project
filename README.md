@@ -1,65 +1,76 @@
-Pharmacy Management System Requirements Document
-------------------------------------------------
+### 1\. **Pharmacist Table**
 
-### 1\. Overview
+*   **PharmacistID**:
+    *   Auto-incremented to ensure uniqueness.
+    *   Used as a primary key for identifying pharmacist records uniquely.
+*   **Name**:
+    *   Store the full name of the pharmacist.
+    *   Ensure the field supports common and special characters to accommodate diverse names.
+*   **ContactInfo**:
+    *   Store contact details, including phone number and email address.
+    *   Validate format to ensure data entered is in correct phone number or email format.
 
-This document describes the requirements for the Pharmacy Management System designed to streamline pharmacy operations by managing pharmacists, patients, medications, prescriptions, suppliers, and inventory orders.
+### 2\. **Patient Table**
 
-### 2\. System Requirements
+*   **PatientID**:
+    *   Auto-incremented and unique.
+    *   Primary key for patient records.
+*   **Name**:
+    *   Capture full name as entered, supporting various character types.
+*   **ContactInfo**:
+    *   Includes phone numbers and email addresses, requiring validation for format correctness.
+*   **InsuranceDetails**:
+    *   Store detailed text describing patient's insurance coverage.
+    *   Field must allow for variable-length text to accommodate different insurance plan details.
 
-#### 2.1 Functional Requirements
+### 3\. **Medication Table**
 
-*   **Pharmacists**
-    
-    *   Add, update, retrieve, and delete pharmacist records.
-    *   Track pharmacist activities linked to prescriptions.
-*   **Patients**
-    
-    *   Register and manage patient profiles including contact and insurance details.
-    *   Access and update patient health records securely.
-*   **Medications**
-    
-    *   Maintain a comprehensive database of medications, including details like manufacturer and price.
-    *   Manage stock levels, including notifications for low inventory.
-*   **Prescriptions**
-    
-    *   Issue and manage prescriptions, linking them to patients, pharmacists, and medications.
-    *   Track prescription durations and refill counts.
-    *   Provide secure access to prescription history for authorized personnel.
-*   **Suppliers**
-    
-    *   Manage supplier information and contact details.
-    *   Record and track orders placed with suppliers, including quantities and dates.
-*   **Inventory Orders**
-    
-    *   Automate order placement when stock reaches a predetermined threshold.
-    *   Track order status from placement through to delivery.
+*   **MedicationID**:
+    *   Unique identifier for each medication, auto-incremented.
+*   **Name**:
+    *   Accurately record medication names.
+    *   Support for brand and generic names.
+*   **Manufacturer**:
+    *   Record the name of the medication manufacturer.
+    *   Support various character types for global manufacturer names.
+*   **StockLevel**:
+    *   Integer to track current stock quantity.
+    *   Should trigger alerts when stock falls below a predefined threshold.
+*   **PricePerUnit**:
+    *   Decimal field to represent the cost per unit, accommodating currency precision.
 
-#### 2.2 Non-Functional Requirements
+### 4\. **Prescription Table**
 
-*   **Performance**: System should handle up to 10,000 records seamlessly.
-*   **Usability**: Interface should be user-friendly, accessible to non-technical users.
-*   **Security**: Implement role-based access controls to secure sensitive data.
-*   **Scalability**: System should support scalability to accommodate growing data volumes and user load.
-*   **Reliability**: System should have an uptime of 99.9%, with proper error handling and data validation.
+*   **PrescriptionID**:
+    *   Unique, auto-incremented identifier for each prescription.
+*   **PatientID, PharmacistID, MedicationID**:
+    *   Foreign keys linking to respective tables.
+    *   Integrity constraints to ensure valid references.
+*   **DatePrescribed**:
+    *   Store the date the prescription was made.
+    *   Ensure the date format is consistently stored (e.g., YYYY-MM-DD).
+*   **Duration**:
+    *   Text field describing the length of time the medication is to be taken.
+*   **RefillsRemaining**:
+    *   Integer indicating the number of refills left; requires validation to ensure non-negative values.
 
-### 3\. Data Requirements
+### 5\. **Supplier Table**
 
-*   **Data Integrity**: Use foreign keys and constraints to maintain data accuracy and prevent orphan records.
-*   **Data Privacy**: Comply with relevant health data protection regulations (e.g., HIPAA in the US).
+*   **SupplierID**:
+    *   Primary key, auto-incremented for uniqueness.
+*   **Name**:
+    *   Store the supplier's full legal name.
+*   **ContactInfo**:
+    *   Record contact details similar to the pharmacist's, including validation for phone and email formats.
 
-### 4\. System Interface Requirements
+### 6\. **Inventory\_Order Table**
 
-*   **User Interface**: Intuitive web or desktop interface for various user roles.
-*   **Integration**: Ability to integrate with existing health systems for patient data import/export.
-
-### 5\. Backup and Recovery
-
-*   **Backup Procedures**: Regular backups of the database to ensure data safety.
-*   **Recovery Strategies**: Procedures to restore data from backups without significant downtime.
-
-### 6\. Reporting
-
-*   **Inventory Reports**: Generate real-time reports on medication stock levels and usage patterns.
-*   **Prescription Reports**: Detailed reports on prescription issuance and history.
-*   **Supplier and Order Reports**: Monitor and report on supplier performance and order statuses.
+*   **OrderID**:
+    *   Unique, auto-incremented identifier for tracking orders.
+*   **MedicationID, SupplierID**:
+    *   Foreign keys ensuring valid connections to the Medication and Supplier tables.
+*   **QuantityOrdered**:
+    *   Integer to track how many units of a medication are ordered.
+*   **OrderDate, ReceivedDate**:
+    *   Date fields capturing when the order was placed and when it was received, respectively.
+    *   Require consistent date formatting.
